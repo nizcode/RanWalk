@@ -12,7 +12,7 @@ then source the code using sourceCpp() this will act as the compiler.
 
 the funciton in the cpp script is called walk()
 it accepts one input n, which is the number of random movements the person takes.
-It returns a data.matrix containing the x and y coordinates of his movements.
+It returns a data matrix containing the x and y coordinates of his movements.
 
 
 
