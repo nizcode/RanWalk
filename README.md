@@ -16,3 +16,7 @@ It returns a data matrix containing the x and y coordinates of his movements.
 
 
 
+Have added another function called destination. returns a bool lweather walker has reached destination after N roads.\
+input is destination vector vector, and N - max number of roads taken
+
+
