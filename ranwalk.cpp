@@ -2,20 +2,19 @@
 using namespace Rcpp;
 using namespace std;
   
-// This is a simple example of exporting a C++ function to R. You can
-// source this function into an R session using the Rcpp::sourceCpp 
-// function (or via the Source button on the editor toolbar). Learn
-// more about Rcpp at:
-//
-//   http://www.rcpp.org/
-//   http://adv-r.had.co.nz/Rcpp.html
-//   http://gallery.rcpp.org/
-//
+//The way I have structured my program is to create the RandomWalk algorithm which returns a matrix of positions
+// Then to answer questions 1,2 and 4 I've written a separate function that calls the algorthmic walk function
+// and then the outputs is specific for answering questions 1,2 and 4.
+//Just thought it was a nicer/ clearer way of organise the code rather than have than copying and pasting the algorithm twice
+//also allows for some flexibility, ie. I can graph the positions of the algorithmic walk
+
+
 
 //the line below has to present before function other wise won't be able to call the function in R
 // [[Rcpp::export]] 
 
-IntegerMatrix walk( int n, int seed){ //n walks, n different postion, mat[n,] = final position
+//Algorithmic random walk function - not used for question 1 and 4
+IntegerMatrix walk( int n, int seed){ //n walks, n different position, mat[n,] = final position
   IntegerMatrix mat(n,2);//rows is each walk, col0=coordinate x, col1=coordinate y
   
   //initializing first movement
@@ -55,7 +54,7 @@ IntegerMatrix walk( int n, int seed){ //n walks, n different postion, mat[n,] = 
 }
 
 //------------------------
-
+//My second and improved algorithmic function which is used for  questions and 1,2 and 4
 // [[Rcpp::export]] 
 IntegerMatrix walk2( int n, int seed){ //n walks, n different postion, mat[n,] = final position
   IntegerMatrix mat(n,2);//rows is each walk, col0=coordinate x, col1=coordinate y
@@ -89,17 +88,19 @@ IntegerMatrix walk2( int n, int seed){ //n walks, n different postion, mat[n,] =
   }
   return(mat);
 }
+//--------------------
+//--------------------
 
 
+//**QUESTION 1 and QUESTION 2**
 
-//this function will look at to see if the distination has been reached and how many goes it takes to reach the distination
-//input is distination and the umber of roads taken
+//this function will look at to see if the destination has been reached and how many goes it takes to reach the destination
+//input is destination and the umber of roads taken
 // so if input is (1,-3) and N =100 roads.
 //output will say whether the destination has been reached at any point during the 100 roads taken
 
 //the line below has to present before function other wise won't be able to call the function in R
 // [[Rcpp::export]] 
-
 LogicalVector Destination(IntegerVector dest, int N, int seed){
   //cout<<dest[0]<<dest[1]<<endl;//for debugging
   IntegerMatrix m = walk2(N, seed); 
@@ -117,6 +118,7 @@ LogicalVector Destination(IntegerVector dest, int N, int seed){
 }
 
 // [[Rcpp::export]] 
+//**QUESTION 4**
 //manhattan distance is defined as the min number of "roads" taken to get to a coordinate destination
 int ManhattanD(int n, int seed){  //finds the Manhatan distance after n amount of moves
   IntegerMatrix m = walk2(n, seed); 
