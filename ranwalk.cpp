@@ -74,7 +74,7 @@ IntegerMatrix walk2( int n, int seed){ //n walks, n different postion, mat[n,] =
     j += 16;
     int ran = rand();
     
-    for(int i = 1; i<n;i++){
+    for(int i = 1; i<16;i++){
       //int p;//p can take 4 possibilities 
       ii = i*2;
       x = (ran>>ii)&0x03;
