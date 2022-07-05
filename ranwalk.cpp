@@ -59,35 +59,60 @@ IntegerMatrix walk( int n, int seed){ //n walks, n different position, mat[n,] =
 IntegerMatrix walk2( int n, int seed){ //n walks, n different postion, mat[n,] = final position
   IntegerMatrix mat(n,2);//rows is each walk, col0=coordinate x, col1=coordinate y
   
-  IntegerVector possib = {0,1,0,-1,1,0,-1,0}; //possibility matrix
-  possib.attr("dim") = Dimension(4,2);//4 possibility = 4 rows, 2 axis = 2 cols
-  IntegerMatrix pm = as<IntegerMatrix>(possib);//change vector to matrix
+  //IntegerVector possib = {0,1,0,-1,1,0,-1,0}; //possibility matrix
+  //possib.attr("dim") = Dimension(4,2);//4 possibility = 4 rows, 2 axis = 2 cols
+  //IntegerMatrix pm = as<IntegerMatrix>(possib);//change vector to matrix
  
   //  start at (0,0) origin
   mat(0,0)=0;
   mat(0,1)=0;
-  IntegerVector ps(n);
   srand(seed);//for reproducibility set seed
-  for(int i = 1; i<n;i++){
-    int p;//p can take 4 possibilities 
-    int ran = rand()%100;
-    //cout<<ran<<endl;
-    if(ran <= 25 && ran > 0){ //1 through 25
-      p =0;
-    } else if(ran > 75){ //76 through 100
-      p =1;
-    } else if(ran >25 && ran <=50){
-      p=2;
-    } else{
-      p=3;
-    }
-    mat(i,0) = mat(i-1,0)+pm(p,0);//change postion of x axis according to possibility p
-    mat(i,1) = mat(i-1,1)+pm(p,1);//change postion of y axis according to possibility p
-    ps[i-1] = p;
+  int j = 0;
+  int ii, x;
+  //IntegerVector ps(n);
+  do{
+    j += 16;
+    int ran = rand();
     
-  }
+    for(int i = 1; i<n;i++){
+      //int p;//p can take 4 possibilities 
+      ii = i*2;
+      x = (ran>>ii)&0x03;
+      //cout<<ran<<endl;
+      switch(x){
+        case 0x00:
+          mat(i,0)=mat(i-1,0)+1;mat(i,1)=mat(i-1,1);break; //move 1 in x direction, +(1,0)
+        
+        case 0x01:
+          mat(i,0)=mat(i-1,0)-1;mat(i,1)=mat(i-1,1);break;//move -1 in x direction -(1,)
+        
+        case 0x02:
+          mat(i,0)=mat(i-1,0);mat(i,1)=mat(i-1,1)+1;break;//move 1 in y direction
+        
+        case 0x03:
+          mat(i,0)=mat(i-1,0);mat(i,1)=mat(i-1,1)-1;break; //move -1 in y direction
+    
+        }//end of switch
+    }//end of inner loop
+  }//end of outer loop
+  while(j < n);
+      //cout<<ran<<endl;
+//    if(ran <= 25 && ran > 0){ //1 through 25
+//      p =0;
+//    } else if(ran > 75){ //76 through 100
+//      p =1;
+//    } else if(ran >25 && ran <=50){
+//      p=2;
+//    } else{
+//      p=3;
+//    }
+//    mat(i,0) = mat(i-1,0)+pm(p,0);//change postion of x axis according to possibility p
+//    mat(i,1) = mat(i-1,1)+pm(p,1);//change postion of y axis according to possibility p
+//    ps[i-1] = p;
+    
   return(mat);
-}
+}//end of walk2 function
+
 //--------------------
 //--------------------
 

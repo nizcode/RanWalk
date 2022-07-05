@@ -3,6 +3,7 @@ library(Rcpp)
 setwd("~/Masters/CProg/Assig2/RanWalk")
 sourceCpp("ranwalk.cpp")
 
+walk2(10,3)
 
 #---------
 #Question 1
@@ -39,7 +40,7 @@ sum(yes20)/1000 #probability is 0.11 of reaching destination within walking 20 r
 #-------
 #Using microbenchmark instead
 library(microbenchmark)
-microbenchmark(walk1 = {walk(100000,2)},walk2 = {walk2(100000,2)}, times = 1000L, unit = "milliseconds")
+microbenchmark(walk1 = {walk(1000,2)},walk2 = {walk2(1000,2)}, times = 100, unit = "milliseconds")
 #interesting to see my second walk function is more efficient
 #------
 
