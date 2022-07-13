@@ -11,17 +11,19 @@ walk2(10,3)
 
 #Has the destination [1,-3] reached after walking a 100 roads? returns a vector of Bool, 
 #as destination might have been reached twice. Therefore TRUE might have come up twice
-TRUE%in%Destination(as.integer(c(-1,3)),100,seed = 4) #yes destination has been reached
+TRUE%in%Destination(as.integer(c(-1,3)),100,seed = 1) #yes destination has been reached
 #by returning a vector of bools we can find out at which position the destination was reached
-which(Destination(as.integer(c(-1,3)),100,seed = 4)==TRUE) #It has been reached after walking 69 roads and again afer 71 
+which(Destination(as.integer(c(-1,3)),100,seed = 1))
+
+#It has been reached after walking 69 roads and again afer 71 
 
 #---------
 #Question2
 #---------
 
 yes20 = rep(0,1000) #stores 1 if reached within 20 and 0 if not
-for(i in 1:1000){
-  walks = Destination(as.integer(c(1,-3)),20,seed = i)
+for(i in 0:1000){
+  walks = Destination(as.integer(c(1,-3)),20,seed = i+2000)
   #
   if(TRUE%in%walks){
     yes20[i] = 1
