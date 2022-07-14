@@ -76,19 +76,19 @@ IntegerMatrix walk2( int n, int seed){ //n walks, n different postion, mat[n,] =
   do{
     //cout<<i<<endl;
     int ran = rand();//iniating random number
-    cout<<bitset<32>(ran)<<endl;
+    //cout<<bitset<32>(ran)<<endl;
     i = (j==0)?1:0;
     while(i<16&&(i+j)<n){
       //for(i=0; i<16;i++){//does i start on 0 or 1.
       //cout<<i<<endl;
       //int p;//p can take 4 possibilities 
-      ii = (i-1)*2;
+      ii = (i)*2;
       //>> shift right ii times. 
       //& bit maski/ng 0x03 is a hexadecimal, 0000,0011 
       //cout<<bitset<32>(ran>>ii)<<endl;
       //cout<<bitset<32>(0x03)<<endl;
       x = (ran>>ii)&0x03;//bit operations
-      cout<<bitset<32>(x)<<endl;
+     // cout<<bitset<32>(x)<<endl;
       //cout<<ran<<endl;
       switch(x){//switch cases
       case 0x00://1st case
